@@ -6,12 +6,7 @@ url = "https://cryptoast.fr/feed/"
 
 try:
     feed = feedparser.parse(url)
-    print(feed)
-
-    print("Feed Title:", feed.feed.title)
-    print("Feed Description:", feed.feed.description)
-    print("Feed Link:", feed.feed.link)
-
+    
     # Define the time range (e.g., the last 24 hours)
     now = datetime.now()
     time_range = timedelta(days=1)  # Adjust days, hours, minutes as needed
@@ -34,6 +29,7 @@ try:
         fieldnames = ['title', 'link', 'published', 'summary']
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
+
         # Iterate through entries and write to the CSV file
         for entry in feed.entries:
             writer.writerow({'title': entry.title, 'link': entry.link, 'published': entry.published, 'summary': entry.summary})
